@@ -39,38 +39,15 @@ d3.json(url,function(data){
     return magnitude / 0.00005;
   };
 
-  // Define a markerColor function that will give each earthquake a different color by depth
-  function markerColor(depth){
-    if(depth>-10 && depth<=10){
-      depthColor = "#006600";
-    }
-    else if(depth>10 && depth<=30){
-      depthColor = "#336210";
-    }
-    else if(depth>30 && depth<=50){
-      depthColor = "#805b28";
-    }
-    else if(depth>50 && depth<=70){
-      depthColor = "#b25738";
-    }
-    else if(depth>70 && depth<=90){
-      depthColor =  "#d95344";
-    }
-    else{
-      depthColor = "#ff5050";
-    }
-    return depthColor
-  };
-
-  function getColor(d) {
-    return d > 90  ? '#ff5050' :
-           d > 70  ? '#FF6666' :
-           d > 50  ? '#b27566' :
-           d > 30  ? '#99826d' :
-           d > 10  ? '#59a17f' :
-           d > 0   ? '#b27566' :
-           d > -10 ? '#d9635b' :
-                     '#ff5050';
+  // Define a color function that will give each earthquake a different color by depth
+    function getColor(d) {
+    return d >= 90  ? '#ff0000' :
+           d >= 70  ? '#ff665c' :
+           d >= 50  ? '#ff662e' :
+           d >= 30  ? '#ff5c00' :
+           d >= 10  ? '#3dc736' :
+           d >= -10 ? '#26d900' :
+                     '#00ff00';
   };
 
   // Store all of the data in an object called earthquake
@@ -97,8 +74,9 @@ d3.json(url,function(data){
 
     // loop through our density intervals and generate a label with a colored square for each interval
     for (var i = 0; i < depth_levels.length; i++) {
+      //console.log(getColor(depth_levels[i]));
       div.innerHTML +=
-      '<i style="background:' + getColor(depth_levels[i] + 1) + '"></i> ' +
+      '<i style="background:' + getColor(depth_levels[i]) + '"></i> ' +
       depth_levels[i] + (depth_levels[i + 1] ? '&ndash;' + depth_levels[i + 1] + '<br>' : '+');
     };
 
